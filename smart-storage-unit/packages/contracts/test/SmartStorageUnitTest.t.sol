@@ -156,14 +156,6 @@ contract SmartStorageUnitTest is MudTest {
     assertEq(ephInvItemOut.quantity, ephemeralItemOutCount, "Incorrect amount of items put into the ephemeral inventory [Item Out]");
   }
 
-  function displayInventory() public {    
-    InventoryItemTableData memory invItem = InventoryItemTable.get(smartStorageUnitId, inventoryItemOut);
-    console.log("[INVENTORY] Owner's Inventory [Item Out]: ", invItem.quantity);
-
-    EphemeralInvItemTableData memory ephInvItem = EphemeralInvItemTable.get(smartStorageUnitId, inventoryItemIn, player);
-    console.log("[EPHEMERAL] Other Player's Inventory [Item In]: ", ephInvItem.quantity);
-  }
-
   function testWorldExists() public {
     uint256 codeSize;
     address addr = worldAddress;
@@ -174,6 +166,7 @@ contract SmartStorageUnitTest is MudTest {
   }
 
   function testSetRatio() public {
+    vm.startPrank(owner);
     //Set the ratio
     world.call(
       systemId,
@@ -187,6 +180,8 @@ contract SmartStorageUnitTest is MudTest {
     RatioConfigData memory ratioConfig = RatioConfig.get(smartStorageUnitId, inventoryItemIn);
     assertTrue(ratioConfig.ratioIn == inRatio);
     assertTrue(ratioConfig.ratioOut == outRatio);
+
+    vm.stopPrank();
   }
 
   function testRevertSetRatioOverflow() public {    
@@ -262,10 +257,6 @@ contract SmartStorageUnitTest is MudTest {
     // Set the trade ratio
     testSetRatio();
 
-    console.log("\nUSING RATIO FROM .env FILE\n");
-    console.log("BEFORE EXECUTION");
-    displayInventory();
-
     // Verify initial inventory quantities
     InventoryItemTableData memory invItem = InventoryItemTable.get(smartStorageUnitId, inventoryItemOut);
     assertEq(invItem.quantity, invItemQuantity);
@@ -282,9 +273,6 @@ contract SmartStorageUnitTest is MudTest {
       systemId,
       abi.encodeCall(SmartStorageUnitSystem.execute, (smartStorageUnitId, quantityIn, inventoryItemIn))
     );    
-
-    console.log("\nAFTER EXECUTION");
-    displayInventory();
     
     inRatio = 15;
     outRatio = 5;
