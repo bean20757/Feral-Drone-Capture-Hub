@@ -16,7 +16,7 @@ import { SmartTurretSystem as CustomSmartTurretSystem } from "../src/systems/Sma
 contract ConfigureSmartTurret is Script {
   function run(address worldAddress) external {
     // Load the private key from the `PRIVATE_KEY` environment variable (in .env)
-    uint256 deployerPrivateKey = vm.envUint("TEST_PLAYER_PRIVATE_KEY");
+    uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
     vm.startBroadcast(deployerPrivateKey);
 
     StoreSwitch.setStoreAddress(worldAddress);
