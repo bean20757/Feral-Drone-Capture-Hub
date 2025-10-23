@@ -22,10 +22,10 @@ function sanitize() {
         printf "\n%b[NOOP]%b file %b%s%b does not exist. Skipping...\n\n" "${GREEN}" "${RESET}" "${GREEN}" "${FILE_NAME}" "${RESET}"
         return
     fi
-    sed "$@" "s/^PRIVATE_KEY=.*/PRIVATE_KEY=$PRIVATE_KEY/" "$FILE_NAME"
-    sed "$@" "s/^WORLD_ADDRESS=.*/WORLD_ADDRESS=$WORLD_ADDRESS #Local World Address/" "$FILE_NAME"
-    sed "$@" "s/^CHAIN_ID=.*/CHAIN_ID=$CHAIN_ID #Local Chain ID/" "$FILE_NAME"
-    sed "$@" "s|^RPC_URL=.*|RPC_URL=$RPC_URL #Forked Anvil Forked Anvil Local RPC Url|" "$FILE_NAME"
+    sed "$@" 's/^PRIVATE_KEY=.*/PRIVATE_KEY='"$PRIVATE_KEY"'/' "$FILE_NAME"
+    sed "$@" 's/^WORLD_ADDRESS=.*/WORLD_ADDRESS='"$WORLD_ADDRESS"' #Local World Address/' "$FILE_NAME"
+    sed "$@" 's/^CHAIN_ID=.*/CHAIN_ID='"$CHAIN_ID"' #Local Chain ID/' "$FILE_NAME"
+    sed "$@" 's|^RPC_URL=.*|RPC_URL='"$RPC_URL"' #Forked Anvil Forked Anvil Local RPC Url|' "$FILE_NAME"
 
     printf "\n%b[SANITIZED]%b file %b%s%b\n\n" "${GREEN}" "${RESET}" "${YELLOW}" "${FILE_NAME}" "${RESET}"
 }
