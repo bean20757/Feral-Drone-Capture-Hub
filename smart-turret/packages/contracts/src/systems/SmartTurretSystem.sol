@@ -217,11 +217,11 @@ contract SmartTurretSystem is System {
   /**
    * @dev a function to set the allowed tribe which does not get targeted by the Smart Turret
    * @param tribeID is the allowed tribe
-   * @notice this function is only callable by the admin
+   * @notice this function is only callable by the owner of the smart turret
    */
-  function setAllowedTribe(uint256 tribeID) public {
+  function setAllowedTribe(uint256 smartTurretId, uint256 tribeID) public {
     // Ensure it's the admin calling this function
-    require(accessSystem.isAdmin(_msgSender()), "You are not authorized to set the allowed tribe");
+    require(accessSystem.isOwner(smartTurretId, _msgSender()), "You are not authorized to set the allowed tribe");
 
     // Validation check on the tribe ID
     require(tribeID > 1000, "Invalid Tribe ID");
