@@ -37,7 +37,7 @@ contract ConfigureSmartTurret is Script {
     
     world.call(
       systemId,
-      abi.encodeCall(CustomSmartTurretSystem.setAllowedTribe, (allowedTribeId))
+      abi.encodeCall(CustomSmartTurretSystem.setAllowedTribe, (smartTurretId, allowedTribeId))
     );
 
     vm.stopBroadcast();

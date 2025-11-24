@@ -106,7 +106,7 @@ contract SmartTurretTest is MudTest {
       systemId,
       abi.encodeCall(
         CustomSmartTurretSystem.setAllowedTribe,
-        (ALLOWED_TRIBE_ID)
+        (smartTurretId, ALLOWED_TRIBE_ID)
       )
     );
     vm.stopPrank();
@@ -160,7 +160,7 @@ contract SmartTurretTest is MudTest {
       systemId,
       abi.encodeCall(
         CustomSmartTurretSystem.setAllowedTribe,
-        (2000)
+        (smartTurretId, 2000)
       )
     );
 
@@ -178,7 +178,7 @@ contract SmartTurretTest is MudTest {
       systemId,
       abi.encodeCall(
         CustomSmartTurretSystem.setAllowedTribe,
-        (2000)
+        (smartTurretId, 2000)
       )
     );
 
@@ -199,7 +199,7 @@ contract SmartTurretTest is MudTest {
       systemId,
       abi.encodeCall(
         CustomSmartTurretSystem.setAllowedTribe,
-        (200)
+        (smartTurretId, 200)
       )
     );
 
