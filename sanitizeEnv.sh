@@ -12,12 +12,22 @@ RESET="\033[0m"
 
 function sanitize() {
     FILE_NAME=$1
-    sed -i "s/^PRIVATE_KEY=.*/PRIVATE_KEY=$PRIVATE_KEY/" "$FILE_NAME"
-    sed -i "s/^WORLD_ADDRESS=.*/WORLD_ADDRESS=$WORLD_ADDRESS #Local World Address/" "$FILE_NAME"
-    sed -i "s/^CHAIN_ID=.*/CHAIN_ID=$CHAIN_ID #Local Chain ID/" "$FILE_NAME"
-    sed -i "s|^RPC_URL=.*|RPC_URL=$RPC_URL #Forked Anvil Forked Anvil Local RPC Url|" "$FILE_NAME"
+    OS=$(uname)
+    if [ "${OS:-}" = "Darwin" ]; then
+      set -- -i ''
+    else
+      set -- -i
+    fi
+    if [ ! -f "$FILE_NAME" ]; then
+        printf "\n%b[NOOP]%b file %b%s%b does not exist. Skipping...\n\n" "${GREEN}" "${RESET}" "${GREEN}" "${FILE_NAME}" "${RESET}"
+        return
+    fi
+    sed "$@" 's/^PRIVATE_KEY=.*/PRIVATE_KEY='"$PRIVATE_KEY"'/' "$FILE_NAME"
+    sed "$@" 's/^WORLD_ADDRESS=.*/WORLD_ADDRESS='"$WORLD_ADDRESS"' #Local World Address/' "$FILE_NAME"
+    sed "$@" 's/^CHAIN_ID=.*/CHAIN_ID='"$CHAIN_ID"' #Local Chain ID/' "$FILE_NAME"
+    sed "$@" 's|^RPC_URL=.*|RPC_URL='"$RPC_URL"' #Forked Anvil Forked Anvil Local RPC Url|' "$FILE_NAME"
 
-    printf "\n${GREEN}[SANITIZED]${RESET} file ${YELLOW}${FILE_NAME}${RESET}\n\n"
+    printf "\n%b[SANITIZED]%b file %b%s%b\n\n" "${GREEN}" "${RESET}" "${YELLOW}" "${FILE_NAME}" "${RESET}"
 }
 
 sanitize "smart-gate/packages/contracts/.env"
