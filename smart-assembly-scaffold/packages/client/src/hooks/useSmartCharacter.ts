@@ -108,7 +108,7 @@ export function useSmartCharacter() {
 
       const worldAddress = await getWorldDeploy(chainID);      
 
-      const response = await fetch("https://indexer.mud.pyropechain.com/q", {
+      const response = await fetch("https://graphql-stillness-internal.live.evefrontier.tech/v1/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

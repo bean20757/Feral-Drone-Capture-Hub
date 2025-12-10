@@ -7,7 +7,7 @@
     "build": "mud build",
     "clean": "forge clean && rm -rf src/**/codegen",
     "deploy:local": ". ./.env && pnpm run build && mud deploy --profile=local --worldAddress ${WORLD_ADDRESS:-$1}",
-    "deploy:pyrope": ". ./.env && pnpm run build && mud deploy --profile=pyrope --worldAddress ${WORLD_ADDRESS:-$1}",
+    "deploy:sepolia": ". ./.env && pnpm run build && mud deploy --profile=sepolia --worldAddress ${WORLD_ADDRESS:-$1}",
     "deploy:garnet": ". ./.env && pnpm run build && mud deploy --profile=garnet --worldAddress ${WORLD_ADDRESS:-$1}",
     "deploy:redstone": ". ./.env && pnpm run build && mud deploy --profile=redstone --worldAddress ${WORLD_ADDRESS:-$1}",
     "dev": "pnpm mud dev-contracts",
@@ -23,6 +23,7 @@
     "read": ". ./.env && pnpm forge script ./script/Read.s.sol:Read --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vv",
 
     "env-stillness": "eve-frontier stillness",
+    "env-op-sepolia": "eve-frontier stillness",
     "env-local": "eve-frontier local",
     "set-namespace": "eve-frontier namespace",
     "set-config": "eve-frontier ssu-config",
