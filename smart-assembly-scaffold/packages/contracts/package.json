@@ -19,7 +19,6 @@
     "mock-data": ". ./.env && pnpm forge script ./script/MockSsuData.s.sol:MockSsuData --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "configure-toggle": ". ./.env && pnpm forge script ./script/ConfigureToggle.s.sol:ConfigureToggle --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "env-stillness": "eve-frontier stillness",
-    "env-op-sepolia": "eve-frontier stillness",
     "env-local": "eve-frontier local",
     "set-namespace": "eve-frontier namespace",
     "set-config": "eve-frontier assembly-scaffold-config",

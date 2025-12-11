@@ -22,7 +22,6 @@
     "link-gates": ". ./.env && pnpm forge script ./script/LinkGates.s.sol:LinkGates --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vvv",
     "can-jump": ". ./.env && pnpm forge script ./script/CanJump.s.sol:CanJump --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vv",
     "env-stillness": "eve-frontier stillness",
-    "env-op-sepolia": "eve-frontier stillness",
     "env-local": "eve-frontier local",
     "set-namespace": "eve-frontier namespace",
     "set-config": "eve-frontier gate-config",

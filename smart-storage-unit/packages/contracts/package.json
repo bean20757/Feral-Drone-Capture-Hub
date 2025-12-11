@@ -23,7 +23,6 @@
     "read": ". ./.env && pnpm forge script ./script/Read.s.sol:Read --broadcast --rpc-url $RPC_URL --chain-id $CHAIN_ID --sig \"run(address)\" $WORLD_ADDRESS -vv",
 
     "env-stillness": "eve-frontier stillness",
-    "env-op-sepolia": "eve-frontier stillness",
     "env-local": "eve-frontier local",
     "set-namespace": "eve-frontier namespace",
     "set-config": "eve-frontier ssu-config",

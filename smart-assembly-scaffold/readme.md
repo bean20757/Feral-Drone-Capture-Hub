@@ -120,10 +120,10 @@ RPC_URL=https://op-sepolia-ext-sync-node-rpc.live.tech.evefrontier.com
 CHAIN_ID=11155420
 ```
 
-You can also automatically point to OP Sepolia with current values using: 
+You can also automatically point to Stillness with current values using: 
 
 ```bash
-pnpm env-op-sepolia
+pnpm env-stillness
 ```
 
 ---
