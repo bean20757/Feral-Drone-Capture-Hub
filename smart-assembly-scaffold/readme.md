@@ -115,9 +115,9 @@ cp .envsample .env
 Next, set the following values in the [.env](./packages/contracts/.env) file to direct the scripts to use Stillness:
 
 ```bash copy
-WORLD_ADDRESS=0x9891ee4bf5f2a9e74e9d81b06b855eec70b78d4f
-RPC_URL=https://pyrope-external-sync-node-rpc.live.tech.evefrontier.com
-CHAIN_ID=695569
+WORLD_ADDRESS=0x1dacc0b64b7da0cc6e2b2fe1bd72f58ebd37363c
+RPC_URL=https://op-sepolia-ext-sync-node-rpc.live.tech.evefrontier.com
+CHAIN_ID=11155420
 ```
 
 You can also automatically point to Stillness with current values using: 
@@ -198,12 +198,12 @@ pnpm set-namespace
 Deploy to Stillness with:
 
 ```bash
-pnpm deploy:pyrope
+pnpm deploy:sepolia
 ```
 
 **Environment Variables**:
 
-- Ensure that your `.env` files in `packages/contracts` and `packages/client` point to the correct deployed instances. For Pyrope, the `WORLD_ADDRESS` and related RPC endpoints must match the environment you are deploying to.
+- Ensure that your `.env` files in `packages/contracts` and `packages/client` point to the correct deployed instances. For OP Sepolia, the `WORLD_ADDRESS` and related RPC endpoints must match the environment you are deploying to.
 
 ### Step 2: 🌐 dApp Environment Variables and Considerations
 
@@ -288,7 +288,7 @@ To run the dApp, navigate to the client directory and run:
 pnpm dev
 ```
 
-You can view the dApp at `localhost:3000`. Make sure your wallet is connected to the Pyrope chain to fully interact with the deployed contracts.
+You can view the dApp at `localhost:3000`. Make sure your wallet is connected to the OP Sepolia chain to fully interact with the deployed contracts.
 
 ---
 

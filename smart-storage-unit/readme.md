@@ -139,9 +139,9 @@ cp .envsample .env
 Next, set the following values in the [.env](./packages/contracts/.env) file to direct the scripts to use Stillness:
 
 ```bash copy
-WORLD_ADDRESS=0xcdb380e0cd3949caf70c45c67079f2e27a77fc47
-RPC_URL=https://pyrope-external-sync-node-rpc.live.tech.evefrontier.com
-CHAIN_ID=695569
+WORLD_ADDRESS=0x1dacc0b64b7da0cc6e2b2fe1bd72f58ebd37363c
+RPC_URL=https://op-sepolia-ext-sync-node-rpc.live.tech.evefrontier.com
+CHAIN_ID=11155420
 ```
 
 You can also automatically point to Stillness with current values using: 
@@ -216,7 +216,7 @@ pnpm set-key
 Then deploy the SSU contracts using:
 
 ```bash
-pnpm run deploy:pyrope
+pnpm run deploy:sepolia
 ```
 
 Once the deployment is successful, you'll see a screen similar to the one below.

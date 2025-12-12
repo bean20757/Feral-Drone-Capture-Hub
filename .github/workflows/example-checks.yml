@@ -150,6 +150,20 @@ jobs:
           pnpm configure          
         working-directory: smart-storage-unit/packages/contracts      
 
+      # Reset Docker to avoid function name collisions between smart-gate and smart-turret
+      - name: Reset Docker World before Smart Turret
+        run: |
+          docker-compose down
+          docker-compose up -d
+
+      - name: Wait for World Deployer to Finish (Smart Turret)
+        run: |
+          echo "Waiting for world-deployer to complete..."
+          docker compose logs -f world-deployer &
+          DEPLOYER_PID=$!
+          docker wait world-deployer
+          echo "world-deployer has finished"
+
       - name: Set RPC
         run: |
           cp ./smart-turret/packages/contracts/.envsample ./smart-turret/packages/contracts/.env

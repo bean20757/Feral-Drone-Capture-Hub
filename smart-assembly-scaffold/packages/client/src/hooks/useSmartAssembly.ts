@@ -114,7 +114,7 @@ export function useSmartAssembly(smartObjectId = 0n) {
 
       const worldAddress = await getWorldDeploy(chainID);       
       // sql query from the indexer.
-      const response = await fetch("https://indexer.mud.pyropechain.com/q", {
+      const response = await fetch("https://graphql-stillness-internal.live.evefrontier.tech/v1/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

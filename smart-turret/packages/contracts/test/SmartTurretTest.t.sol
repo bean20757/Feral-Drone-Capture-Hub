@@ -101,21 +101,15 @@ contract SmartTurretTest is MudTest {
     player2 = address(0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f);
     player3 = address(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
 
-    vm.startPrank(admin);
-    world.call(
-      systemId,
-      abi.encodeCall(
-        CustomSmartTurretSystem.setAllowedTribe,
-        (smartTurretId, ALLOWED_TRIBE_ID)
-      )
-    );
-    vm.stopPrank();
-    vm.startPrank(player, admin);
+    // Calculate smartTurretId BEFORE using it
+    smartTurretId = ObjectIdLib.calculateObjectId(tenantId, SOURCE_GATE_ID);
     
     adminCharacterSmartId = ObjectIdLib.calculateObjectId(tenantId, ADMIN_CHARACTER_ID);
     playerCharacterSmartId = ObjectIdLib.calculateObjectId(tenantId, PLAYER_CHARACTER_ID);
     player2CharacterSmartId = ObjectIdLib.calculateObjectId(tenantId, PLAYER2_CHARACTER_ID);
     player3CharacterSmartId = ObjectIdLib.calculateObjectId(tenantId, PLAYER3_CHARACTER_ID);
+
+    vm.startPrank(player, admin);
 
     safeCreateCharacter(admin, adminCharacterSmartId, ADMIN_CHARACTER_ID, ALLOWED_TRIBE_ID, "adminCharacter");
     safeCreateCharacter(player, playerCharacterSmartId, PLAYER_CHARACTER_ID, ALLOWED_TRIBE_ID, "playerCharacter");
@@ -129,8 +123,6 @@ contract SmartTurretTest is MudTest {
     world.registerDelegation(admin, UNLIMITED_DELEGATION, new bytes(0));
     vm.stopPrank();
 
-    smartTurretId = ObjectIdLib.calculateObjectId(tenantId, SOURCE_GATE_ID);
-
     vm.startPrank(player, admin);
 
     if(DeployableState.getCurrentState(smartTurretId) != State.NULL){
@@ -138,6 +130,15 @@ contract SmartTurretTest is MudTest {
     } else{
       createAnchorAndOnline(smartTurretId, SOURCE_GATE_ID, player);
     }
+
+    // Set allowed tribe AFTER the turret is created (must be called by turret owner = player)
+    world.call(
+      systemId,
+      abi.encodeCall(
+        CustomSmartTurretSystem.setAllowedTribe,
+        (smartTurretId, ALLOWED_TRIBE_ID)
+      )
+    );
 
     vm.stopPrank();
   }
@@ -154,7 +155,7 @@ contract SmartTurretTest is MudTest {
 
   //Test setAllowedTribe
   function testSetAllowedTribe() public {    
-    vm.startPrank(admin);
+    vm.startPrank(player);  // player is the turret owner
 
     world.call(
       systemId,
@@ -191,7 +192,7 @@ contract SmartTurretTest is MudTest {
 
   //Test setAllowedTribe
   function testSetAllowedTribeRevertIfInvalidID() public {    
-    vm.startPrank(admin);
+    vm.startPrank(player);  // player is the turret owner
 
     vm.expectRevert("Invalid Tribe ID");
 
